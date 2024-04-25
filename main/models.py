@@ -18,11 +18,12 @@ class Rig(models.Model):
 
 
 class Box(models.Model):
-    rig = models.ForeignKey(Rig,on_delete=models.CASCADE)
+    rig = models.ForeignKey(Rig,on_delete=models.CASCADE,related_name="box_rigs")
     name = models.CharField(max_length=100)
     gpio_id = models.IntegerField()
     size = models.CharField(max_length=100)
     status = models.BooleanField()
+    reserved = models.BooleanField(blank=True,null=True)
 
     def __str__(self) -> str:
         return "{} - GPIO pin :{}".format(self.name,self.gpio_id)
@@ -33,7 +34,6 @@ class Package(models.Model):
     box = models.ForeignKey(Box,on_delete=models.CASCADE)
     user_id = models.IntegerField()
     package_id = models.IntegerField()
-    reserved = models.BooleanField()
     status = models.BooleanField()
     date = models.DateTimeField(auto_now=True)
 
