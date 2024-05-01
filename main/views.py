@@ -25,19 +25,34 @@ def reader(request):
 
 
 def index(request):
+    barcode = request.GET.get("code")
+    print("barcode",barcode)
+    if barcode:
+        try:
+            _get = Package.objects.get(bar_code=barcode)
+            if _get.box.reserved == True:
+                print("okeyy")
+            messages.warning(request,f"""
+                {barcode}
+            """)
+            return HttpResponseRedirect(reverse('index'))
+        except Exception as e: 
+            print(e)
+            messages.warning(request,"Gonderilen barkod yanlisdir zehmet olmasa texniki xidmet ile elaqe saxlayin")
     return render(request,"index.html")
 
 
 def delivery(request):
     
     barcode = request.GET.get("code")
+    print("barcode",barcode)
     if barcode:
         try:
             _get = Package.objects.get(bar_code=barcode)
             if _get.box.reserved == True:
-                ...
-            messages.warning(request,"""
-            
+                print("okey")
+            messages.warning(request,f"""
+                {barcode}
             
             """)
             return HttpResponseRedirect(reverse('index'))

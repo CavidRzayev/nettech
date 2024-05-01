@@ -37,9 +37,10 @@
                                     {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
+                        {{message}}
                         <div class="btnGroup">
                           <span class="Btn" id="verifiBtn">
-                            <button type="submit"  class="btn btn-primary">Qapini yeniden ac</button>
+                            <button value={{message}}  class="btn btn-primary">Qapini yeniden ac</button>
                           </span>
                           <span class="timer">
                             <span id="counter"></span>
@@ -96,3 +97,14 @@
   }
   countdown();
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    var val = $("button").val(); 
+    $.get("http://0.0.0.0:8001/success/?code="+ val, function(data, status){
+      console.log("okey")
+    });
+  });
+});
+</script>

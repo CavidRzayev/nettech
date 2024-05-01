@@ -32,14 +32,7 @@
   <body>
     <div class="container">
         <br>
-      {% if messages %}
-        {% for message in messages %}
-        <div class={{ message.tags }}>{{ message }}</div>
-        {% if message == "success" %}
-        
-        {% endif %}
-        {% endfor %}
-     {% endif %}
+   
         {% comment %} <a href="{% url 'index' %}"><button type="button" class="btn btn-success">Geri qayit</button></a> {% endcomment %}
             <div class="center" style="width: 760px">
                   {% if messages %}
