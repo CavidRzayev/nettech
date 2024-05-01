@@ -36,6 +36,7 @@ class Package(models.Model):
     package_id = models.IntegerField()
     status = models.BooleanField()
     date = models.DateTimeField(auto_now=True)
+    user_bar_code = models.CharField(max_length=200,blank=True,null=True)
 
     def __str__(self) -> str:
         return "Date : {} - User_id : {} - Packets_id : {}".format(self.date.date(),self.user_id,self.package_id)

@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title></title>
-        <style>
+    <style>
         
         
         .vertical-center {
@@ -30,16 +30,33 @@
         </style>
   </head>
   <body>
-    
     <div class="container">
         <br>
-        <a href="{% url 'index' %}"><button type="button" class="btn btn-success">Geri qayit</button></a>
-            <div class="center">
-                <a href="{% url 'delivery' %}"> <button type="button" class="btn btn-primary" style="    width: 260px;
-                font-size: 40px;">Delivery</button></a>
-
-                <a href="{% url 'client' %}"><button type="button" class="btn btn-primary" style="    width: 260px;
-                font-size: 40px;">Client</button></a>
+        {% comment %} <a href="{% url 'index' %}"><button type="button" class="btn btn-success">Geri qayit</button></a> {% endcomment %}
+            <div class="center" style="width: 760px">
+                                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <div class="btnGroup">
+                          <span class="Btn" id="verifiBtn">
+                            <button type="submit"  class="btn btn-primary">Qapini yeniden ac</button>
+                          </span>
+                          <span class="timer">
+                            <span id="counter"></span>
+                          </span>
+                        </div>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                <form>
+                <label for="barcode" class="form-label" style="font-size: 32px;">Bar Code or Code</label>
+                <input style="    height: 50px;
+                " type="text" id="barcode" name="code" class="form-control" aria-describedby="passwordHelpBlock">
+                {% comment %} <div id="passwordHelpBlock" class="form-text">
+                  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                </div> {% endcomment %}
+               
+            </form>
 
             </div>
     </div>
@@ -55,3 +72,27 @@
     -->
   </body>
 </html>
+
+<script>
+  function countdown() {
+    var seconds = 59;
+    function tick() {
+      var counter = document.getElementById("counter");
+      seconds--;
+      counter.innerHTML =
+        "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+      if (seconds > 0) {
+        setTimeout(tick, 1000);
+      } else {
+        document.getElementById("verifiBtn").innerHTML = `
+            <div class="Btn" id="ResendBtn">
+                <button type="submit" class="btn btn-danger">Vaxt bitdi</button>
+            </div>
+        `;
+        document.getElementById("counter").innerHTML = "";
+      }
+    }
+    tick();
+  }
+  countdown();
+  </script>

@@ -26,7 +26,8 @@ router.register(r'packages', PackageViewSet,basename='packges')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",index,name="index"),
+    path("",delivery,name="delivery"),
+    path("success/",index,name="index"),
     path("delivery/",delivery,name="delivery"),
     path("client/",client,name="client"),
     path("client_bar_code/",client_bar_code,name="client_bar_code"),
